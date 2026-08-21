@@ -6,7 +6,7 @@ Siga o passo a passo abaixo para configurar o ambiente e executar os códigos na
 
 ### 1. Clonar o Repositório
 ```bash
-git clone [https://github.com/SEU_USUARIO/Machine-Learning.git](https://github.com/SEU_USUARIO/Machine-Learning.git)
+git clone https://github.com/Ezequiel-EFS/Machine-Learning.git
 cd Machine-Learning
 
 
