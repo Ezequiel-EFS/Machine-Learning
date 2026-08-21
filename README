@@ -1,0 +1,31 @@
+# 🚀 Como Executar o Projeto
+
+Siga o passo a passo abaixo para configurar o ambiente e executar os códigos na sua máquina.
+
+---
+
+### 1. Clonar o Repositório
+```bash
+git clone [https://github.com/SEU_USUARIO/Machine-Learning.git](https://github.com/SEU_USUARIO/Machine-Learning.git)
+cd Machine-Learning
+
+
+2. Criar e Ativar o Ambiente Virtual (venv)
+Git Bash (Windows) / Linux / macOS:
+
+
+python -m venv .venv
+source .venv/Scripts/activate
+
+3. Instalar as Dependências
+Com o ambiente virtual ativado (.venv), instale os pacotes necessários:
+
+
+pip install --upgrade pip
+pip install numpy pandas scikit-learn matplotlib seaborn openpyxl pyarrow ipykernel
+
+
+4. Executar no VS CodeAbra a pasta do projeto no VS Code.
+--Abra o script frutas.py.
+--No canto superior direito da tela, clique em Select Kernel     $\rightarrow$ Python Environments... $\rightarrow$ selecione o .venv do projeto.
+--Clique dentro de qualquer bloco de código demarcado por # %% e pressione Shift + Enter para rodar a célula na janela interativa.
