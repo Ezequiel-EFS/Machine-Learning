@@ -21,7 +21,7 @@ source .venv/Scripts/activate
 Com o ambiente virtual ativado (.venv), instale os pacotes necessários:
 
 
-pip install --upgrade pip / python -m pip install --upgrade pip
+python -m pip install --upgrade pip
 pip install numpy pandas scikit-learn matplotlib seaborn openpyxl pyarrow ipykernel
 
 
