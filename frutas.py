@@ -41,3 +41,7 @@ proba = arvore.predict_proba([[1,1,1,1]])[0]
 pd.Series(proba,index=arvore.classes_)
 
 # %%
+
+proba = arvore.predict_proba([[0,0,1,1]])[0]
+
+pd.Series(proba,index=arvore.classes_)
