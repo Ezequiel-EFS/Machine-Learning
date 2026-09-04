@@ -7,7 +7,7 @@ print(df)
 # %%
 from sklearn import tree
 
-arvore = tree.DecisionTreeClassifier()
+arvore = tree.DecisionTreeClassifier(random_state=42)
 #%%
 
 y = df["Fruta"]
