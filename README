@@ -27,5 +27,5 @@ pip install numpy pandas scikit-learn matplotlib seaborn openpyxl pyarrow ipyker
 
 4. Executar no VS CodeAbra a pasta do projeto no VS Code.
 --Abra o script frutas.py.
---No canto superior direito da tela, clique em Select Kernel     $\rightarrow$ Python Environments... $\rightarrow$ selecione o .venv do projeto.
---Clique dentro de qualquer bloco de código demarcado por # %% e pressione Shift + Enter para rodar a célula na janela interativa.
+--No canto superior direito da tela, clique em Select Kernel     rightarrow Python Environments... rightarrow selecione o .venv do projeto.
+--Clique dentro de qualquer bloco de código demarcado por #  e pressione Shift + Enter para rodar a célula na janela interativa.
