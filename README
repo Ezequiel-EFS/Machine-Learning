@@ -1,31 +1,163 @@
-# 🚀 Como Executar o Projeto
+# 🤖 Machine Learning
 
-Siga o passo a passo abaixo para configurar o ambiente e executar os códigos na sua máquina.
+Estudos de Machine Learning em Python, com exemplos práticos usando **scikit-learn**. Por enquanto o projeto traz um exemplo de **Árvore de Decisão** que classifica frutas a partir de suas características.
 
 ---
 
-### 1. Clonar o Repositório
+## 📁 Estrutura do Projeto
+
+```text
+Machine-Learning/
+├── data/
+│   ├── dados_frutas.xlsx         # Características das frutas (usado em frutas.py)
+│   ├── dados_cerveja.xlsx        # Dados de tipos de cerveja
+│   ├── dados_cerveja_nota.xlsx   # Notas das cervejas
+│   └── dados_clones.parquet      # Base de dados de clones
+├── frutas.py                     # Árvore de Decisão para classificar frutas
+├── .gitignore
+└── README.md
+```
+
+Ao rodar o `frutas.py`, também é gerada a imagem `arvore_frutas.png` na pasta do projeto.
+
+---
+
+## 🧰 Tecnologias
+
+- Python 3
+- pandas e openpyxl (leitura dos arquivos `.xlsx`)
+- scikit-learn (árvore de decisão)
+- matplotlib (gráfico da árvore)
+- numpy, seaborn e pyarrow (leitura de `.parquet`), usados nos próximos estudos
+
+---
+
+## 🚀 Como Executar
+
+### 1. Clonar o repositório
+
 ```bash
 git clone https://github.com/Ezequiel-EFS/Machine-Learning.git
 cd Machine-Learning
+```
 
+### 2. Criar e ativar o ambiente virtual
 
-2. Criar e Ativar o Ambiente Virtual (venv)
-Git Bash (Windows) / Linux / macOS:
-
-
+```bash
 python -m venv .venv
-source .venv/Scripts/activate
+```
 
-3. Instalar as Dependências
-Com o ambiente virtual ativado (.venv), instale os pacotes necessários:
+Ative de acordo com o seu sistema:
 
+| Sistema | Comando |
+|---|---|
+| Windows (PowerShell) | `.venv\Scripts\Activate.ps1` |
+| Git Bash (Windows) | `source .venv/Scripts/activate` |
+| Linux / macOS | `source .venv/bin/activate` |
 
+Quando der certo, aparece `(.venv)` no começo da linha do terminal.
+
+### 3. Instalar as dependências
+
+```bash
 python -m pip install --upgrade pip
-pip install numpy pandas scikit-learn matplotlib seaborn openpyxl pyarrow ipykernel
+pip install numpy pandas scikit-learn matplotlib seaborn openpyxl pyarrow
+```
 
+### 4. Rodar o código
 
-4. Executar no VS CodeAbra a pasta do projeto no VS Code.
---Abra o script frutas.py.
---No canto superior direito da tela, clique em Select Kernel     rightarrow Python Environments... rightarrow selecione o .venv do projeto.
---Clique dentro de qualquer bloco de código demarcado por #  e pressione Shift + Enter para rodar a célula na janela interativa.
+Com o ambiente ativado, execute no terminal:
+
+```bash
+python frutas.py
+```
+
+Não precisa de janela interativa, Jupyter nem de configurar kernel. O VS Code só é necessário se você quiser usá-lo como editor.
+
+---
+
+## 🍎 Exemplo: Classificação de Frutas
+
+O script `frutas.py` treina uma `DecisionTreeClassifier` com a base `data/dados_frutas.xlsx`, usando quatro características (0 = não, 1 = sim):
+
+| Característica | Descrição |
+|---|---|
+| `Arredondada` | A fruta tem formato arredondado |
+| `Suculenta` | A fruta é suculenta |
+| `Vermelha` | A fruta é vermelha |
+| `Doce` | A fruta é doce |
+
+### O que acontece ao executar
+
+1. Os dados são carregados e mostrados no terminal.
+2. A árvore de decisão é treinada (`random_state=42`).
+3. São feitas três previsões, mostrando a fruta prevista e a probabilidade de cada uma.
+4. A árvore é desenhada em uma janela e salva em `arvore_frutas.png`. Feche a janela para o script terminar.
+
+### Exemplo de saída
+
+```text
+Características [1, 0, 1, 0] -> Tomate
+Características [1, 1, 1, 1] -> Cereja   (Cereja 0.5 / Maçã 0.5)
+Características [0, 0, 1, 1] -> Banana
+```
+
+### Testar outras frutas
+
+No final do arquivo `frutas.py`, dentro da função `main()`, altere a lista de previsões. Cada lista segue a ordem `[Arredondada, Suculenta, Vermelha, Doce]`:
+
+```python
+for valores in ([1, 0, 1, 0], [1, 1, 1, 1], [0, 0, 1, 1]):
+```
+
+---
+
+## 🛠️ Problemas Comuns
+
+**`ModuleNotFoundError: No module named 'pandas'`**
+O Python que está rodando o script não é o do `.venv`. Confira se `(.venv)` aparece no terminal. Se não aparecer, ative de novo (passo 2). Para ter certeza de que está usando o Python do ambiente, rode:
+
+```bash
+python -c "import sys; print(sys.executable)"
+```
+
+O caminho deve estar dentro da pasta `.venv` do projeto.
+
+**Erro de módulo ao rodar pelo botão do Code Runner (`[Running] python -u ...`)**
+A extensão Code Runner usa o Python global do computador, não o `.venv`. Use uma destas opções:
+1. Rodar no terminal com o ambiente ativo: `python frutas.py` (recomendado).
+2. Rodar pelo botão ▶ **Run Python File** da extensão Python do VS Code, depois de selecionar o `.venv` em `Ctrl+Shift+P` → **Python: Select Interpreter**.
+3. Configurar o Code Runner para usar o interpretador selecionado, em `.vscode/settings.json`:
+
+```json
+{
+  "code-runner.executorMap": {
+    "python": "$pythonPath -u $fullFileName"
+  },
+  "code-runner.runInTerminal": true
+}
+```
+
+**`Activate.ps1` bloqueado no PowerShell**
+Rode uma vez e tente ativar de novo:
+
+```powershell
+Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
+```
+
+**`SSLCertVerificationError` ao rodar o `pip`**
+Costuma acontecer em redes com proxy ou antivírus que intercepta conexões (rede de empresa ou faculdade). O `pip` tenta de novo e geralmente conclui. Se falhar, use:
+
+```bash
+pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org numpy pandas scikit-learn matplotlib seaborn openpyxl pyarrow
+```
+
+**A janela do gráfico não fecha / o script não termina**
+O `plt.show()` espera você fechar a janela da árvore. Feche-a e o script termina. A imagem já foi salva em `arvore_frutas.png`.
+
+---
+
+## 📌 Observações
+
+- A pasta `.venv/` não é versionada. Cada pessoa cria a sua seguindo o passo 2.
+- O `ipykernel` não é mais necessário, já que o código roda como script comum.
